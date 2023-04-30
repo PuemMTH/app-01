@@ -3,22 +3,18 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-// use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class MyEmail extends Mailable
+class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
-
     public $recipient;
     public $name;
 
-    /**
-     * Create a new message instance.
-     */
     public function __construct(string $recipient, string $name)
     {
         $this->recipient = $recipient;
@@ -28,7 +24,7 @@ class MyEmail extends Mailable
     public function build()
     {
         return $this->subject('Your Email Subject')
-                    ->markdown('myemail', [
+                    ->markdown('sendmail', [
                         'recipient' => $this->recipient,
                         'name' => $this->name,
                     ]);
@@ -40,7 +36,7 @@ class MyEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'My Email',
+            subject: 'Send Mail',
         );
     }
 

@@ -20,5 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // php artisan make:mail MyEmail
 // php artisan make:controller EmailController
-use App\Http\Controllers\EmailController;
-Route::get('/send-email', [EmailController::class, 'sendEmail']);
+// php artisan make:mail MyEmail --markdown=emails.myemail
+// php artisan make:mail MyEmail --markdown=emails.myemail --subject="This is my email"
+
+// use App\Http\Controllers\EmailController;
+// Route::get('/send-email', [EmailController::class, 'sendEmail']);
+
+use App\Http\Controllers\SendMailController;
+Route::get('/send-email', [SendMailController::class, 'sendEmail']);
